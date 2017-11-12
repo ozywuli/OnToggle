@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toggler Demo</title>
+</head>
+<body>
+
+
+
+<a 
+    href="#" 
+    class="js-toggler" 
+    data-toggler-target="js-menu"
+>
+    Toggler 1
+</a>
+
+<div class="menu js-toggler-target js-menu">I am a menu</div>
+
+
+<a 
+    href="#" 
+    class="js-toggler" 
+    data-toggler-target="js-menu-2"
+>
+    Toggler 2
+</a>
+
+<div class="menu js-toggler-target js-menu-2">I am a menu</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="../dev/js/toggler.js"></script>
+<script>
+
+
+Toggler.onReady();
+</script>
+
+</body>
+</html>
