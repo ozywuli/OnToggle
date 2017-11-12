@@ -1,99 +1,93 @@
 // the semi-colon before the function invocation is a safety
 // net against concatenated scripts and/or other plugins
 // that are not closed properly.
-// the anonymous function protects the `$` alias
-// ;(function( $, window, document, undefined ) {
-//     // if we detect an ios device, then use the `touchstart`event instead of the `click` event
-//     let event = (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? "touchstart" : "click";
-
-//     let defaults = {
-
-//     }
-
-//     // PLUGIN CONSTRUCTOR
-//     function Toggler( element, options ) {
-//         this.element = element;
-
-//         this.options = $.extend( {}, defaults, options );
-
-//         this._defaults = defaults;
-
-//         this._name = Toggler;
-
-//         this.init();
-//     }
-
-//     Toggler.prototype = {
-//         init: function() {
-
-//         }
-//     }
-
-
-
-//     /*------------------------------------*\
-//       EXPORT OPTIONS
-//     \*------------------------------------*/
-//     if (typeof define === 'function' && define.amd) {
-//         define([], function() {
-//             return Toggler;
-//         });
-//     } else if (typeof exports !== "undefined" && exports !== null) {
-//         module.exports = Toggler;
-//     } else {
-//         window.Toggler = Toggler;
-//     }
-
-
-
-// })( jQuery, window , document );
-
-
-window.Toggler = {
+// the anonymous function protects the `$` alias from name collisions
+;(function( $, window, document, undefined ) {
     /**
      * 
      */
-    onReady: function() {
-        Toggler.event = (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? "touchstart" : "click";
+    let defaults = {
+        togglerEl: '.js-toggler',
+        togglerTargetEl: '.js-toggler-target',
+        isVisibleClass: 'is-visible'
+    }
 
-        $(Toggler.$toggler).on('click', Toggler.openToggle);
-        $(document).on(Toggler.event, Toggler.detectOutsideClick);
-    },
+    /**
+     * PLUGIN CONSTRUCTOR 
+     */
+    let Toggler = function( options ) {
+        this.options = $.extend( {}, defaults, options );
+        this.init();
+    }
 
     /**
      * 
      */
-    event: 'click',
+    Toggler.prototype = {
+        
+        /**
+         * 
+         */
+        init: function() {
+            this.checkDevice();
+            $(this.options.togglerEl).on('click', this.openToggle.bind(this));
+            $(document).on(this.eventType, this.detectOutsideClick.bind(this));
+        },
 
-    /**
-     * 
-     */
-    $toggler: '.js-toggler',
+        self: function() {
+            return this;
+        },
+        
+        /**
+         * 
+         */
+        eventType: 'click',
 
-    /**
-     * 
-     */
-    $toggleTarget: '.js-toggler-target',
+        /**
+         * 
+         */
+        checkDevice: function() {
+            // if we detect an ios device, then use the `touchstart`event instead of the `click` event
+            let event = (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? "touchstart" : "click";
+            this.event = event;
+        },
+        /**
+         * 
+         */
+        openToggle: function(event) {
+            event.preventDefault();
+            // get the associated toggle target
+            let thisTogglerTargetEl = $(event.target).attr('data-toggler-target');
 
-    /**
-     * 
-     */
-    openToggle: function(event) {
-        event.preventDefault();
-        // get the associated toggle target
-        let thisToggleTarget = $(this).attr('data-toggler-target');
-        // hide any toggle target that isn't the associated target
-        $(Toggler.$toggleTarget).not( $(`.${thisToggleTarget}`) ).removeClass('is-revealed');
+            // hide any toggle target that isn't the associated target
+            $(this.options.togglerTargetEl).not( $(`.${thisTogglerTargetEl}`) ).removeClass('is-revealed');
+            $(`.${thisTogglerTargetEl}`).toggleClass(this.options.isVisibleClass);
+        },
 
-        $(`.${thisToggleTarget}`).toggleClass('is-revealed');
-    },
-
-    /**
-     * 
-     */
-    detectOutsideClick: function(event) {
-        if ( !$(event.target).closest( `${Toggler.$toggler}, ${Toggler.$toggleTarget}` ).length ) {
-            $(Toggler.$toggleTarget).removeClass('is-revealed');
+        /**
+         * 
+         */
+        detectOutsideClick: function(event) {
+            if ( !$(event.target).closest( `${this.options.togglerEl}, ${this.options.togglerTargetEl}` ).length ) {
+                $(`${this.options.togglerTargetEl}`).removeClass(this.options.isVisibleClass);
+            }
         }
     }
-}
+
+
+    /*------------------------------------*\
+      EXPORT OPTIONS
+    \*------------------------------------*/
+    // if (typeof define === 'function' && define.amd) {
+    //     define([], function() {
+    //         return Toggler;
+    //     });
+    // } else if (typeof exports !== "undefined" && exports !== null) {
+    //     module.exports = Toggler;
+    // } else {
+    //     window.Toggler = Toggler;
+    // }
+    window.Toggler = Toggler;
+
+
+})( jQuery, window , document );
