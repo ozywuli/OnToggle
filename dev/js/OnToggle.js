@@ -100,9 +100,9 @@
     // }
 
     window.OnToggle = OnToggle;
-    // export default OnToggle;
+    module.exports = OnToggle;
 })(jQuery, window, document);
 
 },{}]},{},[1])
 
-//# sourceMappingURL=toggler.js.map
+//# sourceMappingURL=OnToggle.js.map

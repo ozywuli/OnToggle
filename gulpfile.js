@@ -71,7 +71,7 @@ gulp.task('css', function() {
   JS
 \*------------------------------------*/
 function compile(watch) {
-    var bundler = watchify(browserify('./src/js/toggler.js', {
+    var bundler = watchify(browserify('./src/js/OnToggle.js', {
         debug: true,
         extensions: ['js']
     }).transform(babelify.configure({
@@ -86,7 +86,7 @@ function compile(watch) {
                 this.emit('end');
             }
         )
-        .pipe(source('toggler.js'))
+        .pipe(source('OnToggle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sourcemaps.write('./'))
@@ -120,7 +120,7 @@ gulp.task('js', function() {
 gulp.task('watch', function(error) {
     gulp.watch('./src/*.html', ['html']);
     gulp.watch('./src/scss/main.scss', ['css']);
-    gulp.watch('./src/js/toggler.js', ['js']);
+    gulp.watch('./src/js/OnToggle.js', ['js']);
 
     watchJS();
 });

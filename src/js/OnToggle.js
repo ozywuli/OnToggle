@@ -1,21 +1,25 @@
+// https://github.com/jquery-boilerplate/jquery-patterns/blob/master/patterns/jquery.basic.plugin-boilerplate.js
+
 // the semi-colon before the function invocation is a safety
 // net against concatenated scripts and/or other plugins
 // that are not closed properly.
 // the anonymous function protects the `$` alias from name collisions
 ;(function( $, window, document, undefined ) {
+    let pluginName = 'OnToggle';
+
     /**
      * 
      */
     let defaults = {
-        togglerEl: '.js-toggler',
-        togglerTargetEl: '.js-toggler-target',
+        toggleEl: '.js-toggle',
+        toggleTargetEl: '.js-toggle-target',
         isVisibleClass: 'is-visible'
     }
 
     /**
      * PLUGIN CONSTRUCTOR 
      */
-    let Toggler = function( options ) {
+    let OnToggle = function( options ) {
         this.options = $.extend( {}, defaults, options );
         this.init();
     }
@@ -23,19 +27,16 @@
     /**
      * 
      */
-    Toggler.prototype = {
+    // https://stackoverflow.com/questions/4736910/javascript-when-to-use-prototypes
+    OnToggle.prototype = {
         
         /**
          * 
          */
         init: function() {
             this.checkDevice();
-            $(this.options.togglerEl).on('click', this.openToggle.bind(this));
+            $(this.options.toggleEl).on('click', this.openToggle.bind(this));
             $(document).on(this.eventType, this.detectOutsideClick.bind(this));
-        },
-
-        self: function() {
-            return this;
         },
         
         /**
@@ -57,37 +58,48 @@
         openToggle: function(event) {
             event.preventDefault();
             // get the associated toggle target
-            let thisTogglerTargetEl = $(event.target).attr('data-toggler-target');
+            let thistoggleTargetEl = $(event.target).attr('data-toggle-target');
 
             // hide any toggle target that isn't the associated target
-            $(this.options.togglerTargetEl).not( $(`.${thisTogglerTargetEl}`) ).removeClass('is-revealed');
-            $(`.${thisTogglerTargetEl}`).toggleClass(this.options.isVisibleClass);
+            $(this.options.toggleTargetEl).not( $(`.${thistoggleTargetEl}`) ).removeClass('is-revealed');
+            $(`.${thistoggleTargetEl}`).toggleClass(this.options.isVisibleClass);
         },
 
         /**
          * 
          */
         detectOutsideClick: function(event) {
-            if ( !$(event.target).closest( `${this.options.togglerEl}, ${this.options.togglerTargetEl}` ).length ) {
-                $(`${this.options.togglerTargetEl}`).removeClass(this.options.isVisibleClass);
+            if ( !$(event.target).closest( `${this.options.toggleEl}, ${this.options.toggleTargetEl}` ).length ) {
+                $(`${this.options.toggleTargetEl}`).removeClass(this.options.isVisibleClass);
             }
         }
     }
 
+    // A really lightweight plugin wrapper around the constructor,
+    // preventing against multiple instantiations
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName,
+                new OnToggle( options ));
+            }
+        });
+    };
 
     /*------------------------------------*\
       EXPORT OPTIONS
     \*------------------------------------*/
     // if (typeof define === 'function' && define.amd) {
     //     define([], function() {
-    //         return Toggler;
+    //         return toggle;
     //     });
     // } else if (typeof exports !== "undefined" && exports !== null) {
-    //     module.exports = Toggler;
+    //     module.exports = toggle;
     // } else {
-    //     window.Toggler = Toggler;
+    //     window.toggle = toggle;
     // }
-    window.Toggler = Toggler;
 
+    window.OnToggle = OnToggle;
+    module.exports = OnToggle;
 
 })( jQuery, window , document );
