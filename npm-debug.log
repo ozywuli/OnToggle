@@ -1,0 +1,120 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/ousikaa/.nvm/versions/node/v7.2.0/bin/node',
+1 verbose cli   '/home/ousikaa/.nvm/versions/node/v7.2.0/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.9
+3 info using node@v7.2.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/mnt/c/wamp64/www/projects/ontoggle',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/ousikaa/.npm/ontoggle/0.0.1/package.tgz not in flight; packing
+9 verbose correctMkdir /home/ousikaa/.npm correctMkdir not in flight; initializing
+10 info lifecycle ontoggle@0.0.1~prepublish: ontoggle@0.0.1
+11 silly lifecycle ontoggle@0.0.1~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/home/ousikaa/.npm/ontoggle/0.0.1/package.tgz',
+12 verbose tar pack   '/mnt/c/wamp64/www/projects/ontoggle' ]
+13 verbose tarball /home/ousikaa/.npm/ontoggle/0.0.1/package.tgz
+14 verbose folder /mnt/c/wamp64/www/projects/ontoggle
+15 verbose addLocalTarball adding from inside cache /home/ousikaa/.npm/ontoggle/0.0.1/package.tgz
+16 verbose correctMkdir /home/ousikaa/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd ontoggle@0.0.1
+18 verbose afterAdd /home/ousikaa/.npm/ontoggle/0.0.1/package/package.json not in flight; writing
+19 verbose correctMkdir /home/ousikaa/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /home/ousikaa/.npm/ontoggle/0.0.1/package/package.json written
+21 silly publish { name: 'ontoggle',
+21 silly publish   version: '0.0.1',
+21 silly publish   description: '# Getting Started',
+21 silly publish   main: 'OnToggle.js',
+21 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+21 silly publish   author: '',
+21 silly publish   devDependencies:
+21 silly publish    { 'babel-preset-es2015': '^6.6.0',
+21 silly publish      babelify: '^7.2.0',
+21 silly publish      browserify: '^13.0.0',
+21 silly publish      del: '^2.2.0',
+21 silly publish      gulp: '^3.9.1',
+21 silly publish      'gulp-autoprefixer': '^3.1.0',
+21 silly publish      'gulp-clean-css': '^2.0.2',
+21 silly publish      'gulp-cssnano': '^2.1.1',
+21 silly publish      'gulp-plumber': '^1.1.0',
+21 silly publish      'gulp-rename': '^1.2.2',
+21 silly publish      'gulp-sass': '^2.2.0',
+21 silly publish      'gulp-size': '^2.0.0',
+21 silly publish      'gulp-sourcemaps': '^1.6.0',
+21 silly publish      'vinyl-buffer': '^1.0.0',
+21 silly publish      'vinyl-source-stream': '^1.1.0',
+21 silly publish      watchify: '^3.7.0' },
+21 silly publish   license: 'ISC',
+21 silly publish   readme: '# OnToggleJS\n\n# Getting Started\n\nYou need a toggle element and a element that you want to toggle.\n\nToggle element:\n\n```html\n<a \n    href="#" \n    class="js-toggle" \n    data-toggle-target="js-menu"\n>\n    Toggler 1\n</a>\n```\n\nElement that is toggled:\n\n```html\n<div class="menu js-toggle-target js-menu">I am a menu</div>\n```\n\nNow instantiate the OnToggle constructor:\n\n```js\nlet myOnToggle = new OnToggle();\n```\n\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: 'f8cf3d7a277bdf3711e743bbf22241c5a4082392',
+21 silly publish   _id: 'ontoggle@0.0.1',
+21 silly publish   _shasum: 'b81933f25fa5d86836a2061b09671f73e226a2af',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name ontoggle
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'ontoggle',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'ontoggle',
+26 silly mapToRegistry   name: 'ontoggle',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/ontoggle
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /home/ousikaa/.npm/ontoggle/0.0.1/package.tgz
+30 verbose request uri https://registry.npmjs.org/ontoggle
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 5:54:19 PM
+33 verbose request using bearer token for auth
+34 verbose request id d6af0658cd0f5bd7
+35 http request PUT https://registry.npmjs.org/ontoggle
+36 http 403 https://registry.npmjs.org/ontoggle
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '91',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Mon, 13 Nov 2017 01:54:20 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-lax8639-LAX',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1510538060.964342,VS0,VE336',
+37 verbose headers   vary: 'Accept-Encoding, Accept' }
+38 verbose request invalidating /home/ousikaa/.npm/registry.npmjs.org/ontoggle on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: You cannot publish over the previously published version 0.0.1. : ontoggle
+40 verbose stack     at makeError (/home/ousikaa/.nvm/versions/node/v7.2.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/home/ousikaa/.nvm/versions/node/v7.2.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+40 verbose stack     at Request._callback (/home/ousikaa/.nvm/versions/node/v7.2.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+40 verbose stack     at Request.self.callback (/home/ousikaa/.nvm/versions/node/v7.2.0/lib/node_modules/npm/node_modules/request/request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/home/ousikaa/.nvm/versions/node/v7.2.0/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/home/ousikaa/.nvm/versions/node/v7.2.0/lib/node_modules/npm/node_modules/request/request.js:969:12)
+41 verbose statusCode 403
+42 verbose pkgid ontoggle
+43 verbose cwd /mnt/c/wamp64/www/projects/ontoggle
+44 error Linux 4.4.0-43-Microsoft
+45 error argv "/home/ousikaa/.nvm/versions/node/v7.2.0/bin/node" "/home/ousikaa/.nvm/versions/node/v7.2.0/bin/npm" "publish"
+46 error node v7.2.0
+47 error npm  v3.10.9
+48 error code E403
+49 error You cannot publish over the previously published version 0.0.1. : ontoggle
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
