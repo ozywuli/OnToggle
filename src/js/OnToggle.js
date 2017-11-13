@@ -99,6 +99,8 @@
     //     window.toggle = toggle;
     // }
 
+    console.log('wtf');
+
     window.OnToggle = OnToggle;
     module.exports = OnToggle;
 
