@@ -113,6 +113,10 @@ gulp.task('js', function() {
     return compile();
 });
 
+gulp.task('tmp-js', function() {
+    gulp.src('./src/js/*.js')
+        .pipe(gulp.dest('dist'));
+});
 
 /*------------------------------------*\
   WATCH
@@ -120,7 +124,7 @@ gulp.task('js', function() {
 gulp.task('watch', function(error) {
     gulp.watch('./src/*.html', ['html']);
     gulp.watch('./src/scss/main.scss', ['css']);
-    gulp.watch('./src/js/OnToggle.js', ['js']);
+    gulp.watch('./src/js/OnToggle.js', ['js', 'tmp-js']);
 
     watchJS();
 });
@@ -139,4 +143,4 @@ gulp.task('build', function() {
 /*------------------------------------*\
   DEFAULT TASK
 \*------------------------------------*/
-gulp.task('default', ['watch', 'html', 'css', 'js']);
+gulp.task('default', ['watch', 'html', 'css', 'js', 'tmp-js']);

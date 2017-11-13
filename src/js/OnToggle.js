@@ -61,7 +61,7 @@
             let thistoggleTargetEl = $(event.target).attr('data-toggle-target');
 
             // hide any toggle target that isn't the associated target
-            $(this.options.toggleTargetEl).not( $(`.${thistoggleTargetEl}`) ).removeClass('is-revealed');
+            $(this.options.toggleTargetEl).not( $(`.${thistoggleTargetEl}`) ).removeClass(this.options.isVisibleClass);
             $(`.${thistoggleTargetEl}`).toggleClass(this.options.isVisibleClass);
         },
 
@@ -99,9 +99,6 @@
     //     window.toggle = toggle;
     // }
 
-    console.log('wtf');
-
-    window.OnToggle = OnToggle;
     module.exports = OnToggle;
 
 })( jQuery, window , document );
