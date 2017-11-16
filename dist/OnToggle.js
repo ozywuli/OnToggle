@@ -74,7 +74,7 @@
          */
         detectOutsideClick: function(event) {
             if ( !$(event.target).closest( `${this.options.toggleEl}, ${this.options.toggleTargetEl}` ).length ) {
-                $(`${this.options.toggleTargetEl}`).removeClass(this.options.isVisibleClass);
+                $(`${this.options.toggleEl}, ${this.options.toggleTargetEl}`).removeClass(this.options.isVisibleClass);
             }
         }
     }
