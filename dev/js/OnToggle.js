@@ -52,19 +52,23 @@
         checkDevice: function checkDevice() {
             // if we detect an ios device, then use the `touchstart`event instead of the `click` event
             var event = /iPad|iPhone|iPod/.test(navigator.userAgent) ? "touchstart" : "click";
-            this.event = event;
+            this.eventType = event;
         },
         /**
          * 
          */
         openToggle: function openToggle(event) {
             event.preventDefault();
+
+            // TOGGLE THIS EL'S CLASS
+            $(event.target).toggleClass(this.options.isVisibleClass);
+
             // get the associated toggle target
-            var thistoggleTargetEl = $(event.target).attr('data-toggle-target');
+            var thisToggleTargetEl = $(event.target).attr('data-toggle-target');
 
             // hide any toggle target that isn't the associated target
-            $(this.options.toggleTargetEl).not($('.' + thistoggleTargetEl)).removeClass(this.options.isVisibleClass);
-            $('.' + thistoggleTargetEl).toggleClass(this.options.isVisibleClass);
+            $(this.options.toggleTargetEl).not($('.' + thisToggleTargetEl)).removeClass(this.options.isVisibleClass);
+            $('.' + thisToggleTargetEl).toggleClass(this.options.isVisibleClass);
         },
 
         /**
