@@ -35,7 +35,11 @@
          */
         init: function() {
             this.checkDevice();
+            // ADD CLICK EVENT TO TOGGLE ELEMENT
             $(this.options.toggleEl).on('click', this.openToggle.bind(this));
+            // REMOVE CLICK EVENT ON CHILD ELEMENTS
+            $(this.options.toggleEl).children().css('pointer-events', 'none');
+            // CLICK ANYWHERE BUT THE TOGGLE ELEMENT AND THE TARGET FROM TO DEACTIVATE
             $(document).on(this.eventType, this.detectOutsideClick.bind(this));
         },
         
@@ -57,6 +61,9 @@
          */
         openToggle: function(event) {
             event.preventDefault();
+            // event.stopPropagation();
+
+            console.log(event.target);
 
             // TOGGLE THIS EL'S CLASS
             $(event.target).toggleClass(this.options.isVisibleClass);

@@ -57,7 +57,9 @@ gulp.task('css', function() {
             }
         }))
         .pipe(sourcemaps.init())
-        .pipe(sass())
+        .pipe(sass({
+            includePaths: ['node_modules/foundation-sites/scss']
+        }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
