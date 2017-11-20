@@ -75,7 +75,8 @@ gulp.task('css', function() {
 function compile(watch) {
     var bundler = watchify(browserify('./src/js/OnToggle.js', {
         debug: true,
-        extensions: ['js']
+        extensions: ['js'],
+        standalone: 'OnToggle'
     }).transform(babelify.configure({
             presets: ["es2015"]
         }))
@@ -125,7 +126,7 @@ gulp.task('tmp-js', function() {
 \*------------------------------------*/
 gulp.task('watch', function(error) {
     gulp.watch('./src/*.html', ['html']);
-    gulp.watch('./src/scss/main.scss', ['css']);
+    gulp.watch('./src/scss/*/*.scss', ['css']);
     gulp.watch('./src/js/OnToggle.js', ['js', 'tmp-js']);
 
     watchJS();

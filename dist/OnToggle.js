@@ -1,3 +1,9 @@
+/**
+ * OnToggle.js
+ * @author Ozy Wu-Li - @ousikaa
+ * @description Toggle DOM element state
+ */
+
 // https://github.com/jquery-boilerplate/jquery-patterns/blob/master/patterns/jquery.basic.plugin-boilerplate.js
 
 // the semi-colon before the function invocation is a safety
@@ -61,9 +67,6 @@
          */
         openToggle: function(event) {
             event.preventDefault();
-            // event.stopPropagation();
-
-            console.log(event.target);
 
             // TOGGLE THIS EL'S CLASS
             $(event.target).toggleClass(this.options.isVisibleClass);
@@ -100,16 +103,6 @@
     /*------------------------------------*\
       EXPORT OPTIONS
     \*------------------------------------*/
-    // if (typeof define === 'function' && define.amd) {
-    //     define([], function() {
-    //         return toggle;
-    //     });
-    // } else if (typeof exports !== "undefined" && exports !== null) {
-    //     module.exports = toggle;
-    // } else {
-    //     window.toggle = toggle;
-    // }
-
     module.exports = OnToggle;
 
 })( jQuery, window , document );
