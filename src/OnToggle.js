@@ -14,7 +14,7 @@
     let pluginName = 'OnToggle';
 
     /**
-     * 
+     * Defaults
      */
     let defaults = {
         toggleEl: '.js-toggle',
@@ -31,7 +31,7 @@
     }
 
     /**
-     * 
+     * Prototype
      */
     // https://stackoverflow.com/questions/4736910/javascript-when-to-use-prototypes
     OnToggle.prototype = {
@@ -50,20 +50,23 @@
         },
         
         /**
+         * Event type
          * 
          */
         eventType: 'click',
 
         /**
-         * 
+         * Check device
          */
         checkDevice: function() {
             // if we detect an ios device, then use the `touchstart`event instead of the `click` event
             let event = (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? "touchstart" : "click";
             this.eventType = event;
         },
+
+
         /**
-         * 
+         *  Open toggle
          */
         openToggle: function(event) {
             event.preventDefault();
@@ -80,7 +83,7 @@
         },
 
         /**
-         * 
+         * Detect outside click
          */
         detectOutsideClick: function(event) {
             if ( !$(event.target).closest( `${this.options.toggleEl}, ${this.options.toggleTargetEl}` ).length ) {
