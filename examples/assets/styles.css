@@ -5,3 +5,8 @@ html, body {
 
 .container {
   padding: 20px 0; }
+
+.site-menu {
+  opacity: 0; }
+  .site-menu.is-visible {
+    opacity: 1; }

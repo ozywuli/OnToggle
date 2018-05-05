@@ -17,20 +17,28 @@
             <div class="cell">
                 <header>
                     <h1>OnToggle.js</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus atque officia exercitationem distinctio ducimus numquam neque quae quas, sed magni eius ad voluptas delectus minima sunt vitae ea sequi odit.</p>
                 </header>
             </div>
-            <div class="cell">
-                <h2>Demo 1</h2>
-                <p data-height="590" data-theme-id="dark" data-slug-hash="EbQYjP" data-default-tab="html,result" data-user="ozywuli" data-embed-version="2" data-pen-title="OnToggle.js Demo 1" class="codepen">See the Pen <a href="https://codepen.io/ozywuli/pen/EbQYjP/">OnToggle.js Demo 1</a> by ozywuli (<a href="https://codepen.io/ozywuli">@ozywuli</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-            </div>
 
-            <div class="cell">
-                
+            <div class="cell">                
                 <h2>Demo 2</h2>
+                <a 
+                    href="#" 
+                    class="js-ontoggle-toggler" 
+                    data-ontoggle-target="js-menu"
+                >
+                    Menu
+                </a>
 
-                
+
+                <div 
+                    class="site-menu js-ontoggle-target"
+                    data-ontoggle-target="js-menu"
+                >
+                    I am a menu.
+                </div>
+
+
             </div>
         </div>
 
@@ -44,9 +52,14 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script src="js/OnToggle.js"></script>
+<script src="OnToggle.js"></script>
 <script>
+$(document).ready(function() {
+    var myOnToggle = new OnToggle();
+
+});
 </script>
+
 
 </body>
 </html>

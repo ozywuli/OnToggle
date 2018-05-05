@@ -3,5 +3,5 @@ let gulp = require('gulp');
 let GulpJumpstart = require('gulp-jumpstart');
 
 new GulpJumpstart(gulp, {
-    pluginName: 'OnToggle',
+    pluginName: 'OnToggle'
 });

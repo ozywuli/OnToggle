@@ -35,6 +35,7 @@
         this.init();
     }
 
+
     /**
      * Prototype
      */
@@ -101,10 +102,10 @@
 
     // A really lightweight plugin wrapper around the constructor,
     // preventing against multiple instantiations
-    $.fn[pluginName] = function ( options ) {
+    $.fn[namespace['pluginName']] = function ( options ) {
         return this.each(function () {
-            if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName,
+            if (!$.data(this, "plugin_" + namespace['pluginName'])) {
+                $.data(this, "plugin_" + namespace['pluginName'],
                 new OnToggle( options ));
             }
         });
