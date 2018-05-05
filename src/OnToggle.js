@@ -11,21 +11,26 @@
 // that are not closed properly.
 // the anonymous function protects the `$` alias from name collisions
 ;(function( $, window, document, undefined ) {
-    let pluginName = 'OnToggle';
+    /**
+     * Plugin namespace
+     */
+    let namespace = {
+        pluginName: 'OnToggle'
+    };
 
     /**
      * Defaults
      */
     let defaults = {
-        toggleEl: '.js-toggle',
-        toggleTargetEl: '.js-toggle-target',
+        toggleEl: '.js-ontoggle-toggler',
+        toggleTargetEl: '.js-ontoggle-target',
         isVisibleClass: 'is-visible'
     }
 
     /**
-     * PLUGIN CONSTRUCTOR 
+     * Plugin Constructor
      */
-    let OnToggle = function( options ) {
+    namespace['pluginName'] = function( options ) {
         this.options = $.extend( {}, defaults, options );
         this.init();
     }
@@ -34,7 +39,7 @@
      * Prototype
      */
     // https://stackoverflow.com/questions/4736910/javascript-when-to-use-prototypes
-    OnToggle.prototype = {
+    namespace['pluginName'].prototype = {
         
         /**
          * 
@@ -75,11 +80,13 @@
             $(event.target).toggleClass(this.options.isVisibleClass);
 
             // get the associated toggle target
-            let thisToggleTargetEl = $(event.target).attr('data-toggle-target');
+            let thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
 
             // hide any toggle target that isn't the associated target
-            $(this.options.toggleTargetEl).not( $(`.${thisToggleTargetEl}`) ).removeClass(this.options.isVisibleClass);
-            $(`.${thisToggleTargetEl}`).toggleClass(this.options.isVisibleClass);
+            $(this.options.toggleTargetEl).not( $(`${this.options.toggleTargetEl}[data-ontoggle-target=${thisToggleTargetEl}]`) ).removeClass(this.options.isVisibleClass);
+
+            // toggle the class of the target element
+            $(`${this.options.toggleTargetEl}[data-ontoggle-target=${thisToggleTargetEl}]`).toggleClass(this.options.isVisibleClass);
         },
 
         /**
@@ -106,6 +113,6 @@
     /*------------------------------------*\
       EXPORT OPTIONS
     \*------------------------------------*/
-    module.exports = OnToggle;
+    module.exports = namespace['pluginName'];
 
 })( jQuery, window , document );
