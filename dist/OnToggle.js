@@ -27,7 +27,8 @@
     var defaults = {
         toggleEl: '.js-ontoggle-toggler',
         toggleTargetEl: '.js-ontoggle-target',
-        isVisibleClass: 'is-visible'
+        isVisibleClass: 'is-visible',
+        done: function done(context) {}
 
         /**
          * Plugin Constructor
@@ -44,14 +45,17 @@
     namespace['pluginName'].prototype = {
 
         /**
-         * 
+         * Init
          */
         init: function init() {
             this.checkDevice();
+
             // ADD CLICK EVENT TO TOGGLE ELEMENT
             $(this.options.toggleEl).on('click', this.openToggle.bind(this));
+
             // REMOVE CLICK EVENT ON CHILD ELEMENTS
             $(this.options.toggleEl).children().css('pointer-events', 'none');
+
             // CLICK ANYWHERE BUT THE TOGGLE ELEMENT AND THE TARGET FROM TO DEACTIVATE
             $(document).on(this.eventType, this.detectOutsideClick.bind(this));
         },
@@ -75,19 +79,24 @@
          *  Open toggle
          */
         openToggle: function openToggle(event) {
+            var thisToggleTargetEl = void 0;
+
             event.preventDefault();
 
-            // TOGGLE THIS EL'S CLASS
-            $(event.target).toggleClass(this.options.isVisibleClass);
-
             // get the associated toggle target
-            var thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
+            thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
+
+            // TOGGLE THIS EL'S CLASS
+            $(this.options.toggleEl + '[data-ontoggle-target=' + thisToggleTargetEl + ']').toggleClass(this.options.isVisibleClass);
 
             // hide any toggle target that isn't the associated target
             $(this.options.toggleTargetEl).not($(this.options.toggleTargetEl + '[data-ontoggle-target=' + thisToggleTargetEl + ']')).removeClass(this.options.isVisibleClass);
 
             // toggle the class of the target element
             $(this.options.toggleTargetEl + '[data-ontoggle-target=' + thisToggleTargetEl + ']').toggleClass(this.options.isVisibleClass);
+
+            // Callback
+            this.options.done(thisToggleTargetEl);
         },
 
         /**

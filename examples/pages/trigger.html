@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OnToggle.js | Ozy Wu-Li</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<div class="container">
+    <div class="grid-container">
+
+        <div class="grid-x grid-margin-x grid-margin-y">
+            <div class="cell">
+                <header>
+                    <h1>OnToggle.js</h1>
+                </header>
+            </div>
+
+            <div class="cell">                
+                <h2>Trigger Demo</h2>
+                <a 
+                    href="#" 
+                    class="js-ontoggle-toggler"
+                    data-ontoggle-target="js-menu"
+                >
+                    Menu
+                </a>
+
+                <br />
+
+                <a 
+                    href="#"
+                    class="js-ontoggle-toggler"
+                    data-ontoggle-target="js-menu"
+                >
+                    Trigger Menu
+                </a>
+
+                <div 
+                    class="site-menu js-ontoggle-target"
+                    data-ontoggle-target="js-menu"
+                >
+                    I am a menu.
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="OnToggle.js"></script>
+<script>
+$(document).ready(function() {
+    var myOnToggle = new OnToggle({
+        done: function(context) {
+            console.log(context);
+            
+        }
+    });
+
+
+});
+
+
+
+</script>
+
+
+</body>
+</html>
