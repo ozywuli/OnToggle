@@ -30,6 +30,16 @@
                     Menu
                 </a>
 
+                <br>
+
+                <a 
+                    href="#" 
+                    class="js-ontoggle-trigger"
+                    data-ontoggle-target="js-menu"
+                >
+                    Trigger
+                </a>
+
                 <div 
                     class="site-menu js-ontoggle-target"
                     data-ontoggle-target="js-menu"
@@ -73,9 +83,16 @@
 $(document).ready(function() {
     var myOnToggle = new OnToggle({
         done: function(event, context) {
-            console.log(event.target.classList.contains('trigger'));
-            console.log(context);
+            console.log(myOnToggle.toggleProps);
         }
+    });
+
+    $('.js-ontoggle-trigger').on('click', function(event) {
+        event.preventDefault();
+        myOnToggle.triggerToggle($(this).attr('data-ontoggle-target'));
+
+        
+        
     });
 
 

@@ -23,6 +23,7 @@
      */
     let defaults = {
         toggleEl: '.js-ontoggle-toggler',
+        toggleTriggerEl: '.js-ontoggle-trigger',
         toggleTargetEl: '.js-ontoggle-target',
         isVisibleClass: 'is-visible',
         done: function(context) {
@@ -68,6 +69,15 @@
         eventType: 'click',
 
         /**
+         * Toggle Properties
+         */
+        toggleProps: {
+            isToggled: false,
+            prevToggle: false,
+            currentToggle: false
+        },
+
+        /**
          * Check device
          */
         checkDevice: function() {
@@ -77,15 +87,35 @@
         },
 
         /**
+         * Trigger toggle
+         */
+        triggerToggle: function(context) {
+            this.openToggle(null, context);
+        },
+
+        /**
          *  Open toggle
          */
-        openToggle: function(event) {
+        openToggle: function(event, context) {
             let thisToggleTargetEl;
 
-            event.preventDefault();
+            if (event) {
+                event.preventDefault();
 
-            // get the associated toggle target
-            thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
+                // get the associated toggle target
+                thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
+            }
+
+            if (context) {
+                thisToggleTargetEl = context;
+            }
+
+            if (!(this.toggleProps.currentToggle === thisToggleTargetEl)) {
+                this.toggleProps.currentToggle = thisToggleTargetEl;
+                this.toggleProps.isToggled = true;
+            } else {
+                this.toggleProps.isToggled = this.toggleProps.isToggled ? false : true; 
+            }
 
             // hide any toggles that isn't toggled
             $(this.options.toggleEl).not( $(`${this.options.toggleEl}[data-ontoggle-target=${thisToggleTargetEl}]`) ).removeClass(this.options.isVisibleClass);
@@ -107,11 +137,20 @@
          * Detect outside click
          */
         detectOutsideClick: function(event) {
-            if ( !$(event.target).closest( `
-                ${this.options.toggleEl}, 
-                ${this.options.toggleTargetEl}` ).length 
+            if ( !$(event.target).closest(`
+                    ${this.options.toggleEl},
+                    ${this.options.toggleTriggerEl}, 
+                    ${this.options.toggleTargetEl}
+                `).length 
             ) {
+                // Remove visibility class from all toggled elements and targets
                 $(`${this.options.toggleEl}, ${this.options.toggleTargetEl}`).removeClass(this.options.isVisibleClass);
+
+                // Set isToggled to be false
+                this.toggleProps.isToggled = this.toggleProps.prevToggle = this.toggleProps.currentToggle = false;
+
+                // Callback
+                this.options.done();
             }
         }
     }

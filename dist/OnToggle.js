@@ -26,6 +26,7 @@
      */
     var defaults = {
         toggleEl: '.js-ontoggle-toggler',
+        toggleTriggerEl: '.js-ontoggle-trigger',
         toggleTargetEl: '.js-ontoggle-target',
         isVisibleClass: 'is-visible',
         done: function done(context) {}
@@ -67,6 +68,15 @@
         eventType: 'click',
 
         /**
+         * Toggle Properties
+         */
+        toggleProps: {
+            isToggled: false,
+            prevToggle: false,
+            currentToggle: false
+        },
+
+        /**
          * Check device
          */
         checkDevice: function checkDevice() {
@@ -76,15 +86,35 @@
         },
 
         /**
+         * Trigger toggle
+         */
+        triggerToggle: function triggerToggle(context) {
+            this.openToggle(null, context);
+        },
+
+        /**
          *  Open toggle
          */
-        openToggle: function openToggle(event) {
+        openToggle: function openToggle(event, context) {
             var thisToggleTargetEl = void 0;
 
-            event.preventDefault();
+            if (event) {
+                event.preventDefault();
 
-            // get the associated toggle target
-            thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
+                // get the associated toggle target
+                thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
+            }
+
+            if (context) {
+                thisToggleTargetEl = context;
+            }
+
+            if (!(this.toggleProps.currentToggle === thisToggleTargetEl)) {
+                this.toggleProps.currentToggle = thisToggleTargetEl;
+                this.toggleProps.isToggled = true;
+            } else {
+                this.toggleProps.isToggled = this.toggleProps.isToggled ? false : true;
+            }
 
             // hide any toggles that isn't toggled
             $(this.options.toggleEl).not($(this.options.toggleEl + '[data-ontoggle-target=' + thisToggleTargetEl + ']')).removeClass(this.options.isVisibleClass);
@@ -106,8 +136,15 @@
          * Detect outside click
          */
         detectOutsideClick: function detectOutsideClick(event) {
-            if (!$(event.target).closest('\n                ' + this.options.toggleEl + ', \n                ' + this.options.toggleTargetEl).length) {
+            if (!$(event.target).closest('\n                    ' + this.options.toggleEl + ',\n                    ' + this.options.toggleTriggerEl + ', \n                    ' + this.options.toggleTargetEl + '\n                ').length) {
+                // Remove visibility class from all toggled elements and targets
                 $(this.options.toggleEl + ', ' + this.options.toggleTargetEl).removeClass(this.options.isVisibleClass);
+
+                // Set isToggled to be false
+                this.toggleProps.isToggled = this.toggleProps.prevToggle = this.toggleProps.currentToggle = false;
+
+                // Callback
+                this.options.done();
             }
         }
 
