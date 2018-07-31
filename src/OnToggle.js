@@ -73,7 +73,6 @@
          */
         toggleProps: {
             isToggled: false,
-            prevToggle: false,
             currentToggle: false
         },
 
@@ -147,7 +146,7 @@
                 $(`${this.options.toggleEl}, ${this.options.toggleTargetEl}`).removeClass(this.options.isVisibleClass);
 
                 // Set isToggled to be false
-                this.toggleProps.isToggled = this.toggleProps.prevToggle = this.toggleProps.currentToggle = false;
+                this.toggleProps.isToggled = this.toggleProps.currentToggle = false;
 
                 // Callback
                 this.options.done();
