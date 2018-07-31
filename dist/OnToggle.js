@@ -86,6 +86,9 @@
             // get the associated toggle target
             thisToggleTargetEl = $(event.target).attr('data-ontoggle-target');
 
+            // hide any toggles that isn't toggled
+            $(this.options.toggleEl).not($(this.options.toggleEl + '[data-ontoggle-target=' + thisToggleTargetEl + ']')).removeClass(this.options.isVisibleClass);
+
             // TOGGLE THIS EL'S CLASS
             $(this.options.toggleEl + '[data-ontoggle-target=' + thisToggleTargetEl + ']').toggleClass(this.options.isVisibleClass);
 
@@ -103,7 +106,7 @@
          * Detect outside click
          */
         detectOutsideClick: function detectOutsideClick(event) {
-            if (!$(event.target).closest(this.options.toggleEl + ', ' + this.options.toggleTargetEl).length) {
+            if (!$(event.target).closest('\n                ' + this.options.toggleEl + ', \n                ' + this.options.toggleTargetEl).length) {
                 $(this.options.toggleEl + ', ' + this.options.toggleTargetEl).removeClass(this.options.isVisibleClass);
             }
         }
