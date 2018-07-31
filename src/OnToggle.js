@@ -97,7 +97,7 @@
             $(`${this.options.toggleTargetEl}[data-ontoggle-target=${thisToggleTargetEl}]`).toggleClass(this.options.isVisibleClass);
 
             // Callback
-            this.options.done(thisToggleTargetEl);
+            this.options.done(event, thisToggleTargetEl);
         },
 
         /**
